@@ -5,7 +5,7 @@
 | Document | Decision Log |
 | Purpose | Record significant project decisions, the options considered, and the reasoning, so later documents, code, and AI agents can follow them consistently |
 | Status | **Draft** — living document |
-| Version | 0.19 |
+| Version | 0.20 |
 | Owner | Project owner (Chingmony) |
 | Last updated | 2026-10-27 |
 
@@ -32,6 +32,7 @@
 | 0.17 | 2026-10-29 | Claude Code | Added DEC-050; noted Development Plan and Risk Register v1.0 approval |
 | 0.18 | 2026-10-29 | Claude Code | Added DEC-051 – DEC-053 from T-002 |
 | 0.19 | 2026-10-29 | Claude Code | Added DEC-054: T-002 skeleton pushed before the harness; harness doc restored |
+| 0.20 | 2026-10-29 | Claude Code | Added DEC-055, DEC-056 from T-003 |
 
 ## How to Use This Log
 
@@ -97,6 +98,8 @@
 | DEC-052 | Console command added in T-043; `cli/__init__.py` re-exports `main` | Accepted | 2026-10-29 |
 | DEC-053 | ruff excludes `docs/` and Markdown; `.gitattributes` forces LF | Accepted | 2026-10-29 |
 | DEC-054 | Push the T-002 project skeleton before the harness exists | Accepted | 2026-10-29 |
+| DEC-055 | Shared address checker in `scripts/`; pytest `importlib` mode; TR-001 package test | Accepted | 2026-10-29 |
+| DEC-056 | Approved lint suppressions (TS-42 register) | Accepted | 2026-10-29 |
 
 ---
 
@@ -443,6 +446,28 @@ eports`, with `--output` to override. Existing files are never overwritten.
 - **Decision:** Push T-002 on owner instruction after the same manual audit as DEC-049, plus `pip-audit` clean (DEC-051).
 - **Also recorded:** at 12:37 on 2026-10-29, `docs/harness/AI-HARNESS-DESIGN.md` was found damaged in the working copy. A few characters had been deleted from the §5.2 JSON example. The cause is unknown; it wasn't an edit by Claude. On owner instruction, the file was restored from commit `4c2bd95` with `git checkout`.
 - **Consequences:** Pushes after this one still require owner instruction. Feature code still waits for the verified harness, unless the owner decides otherwise.
+
+### DEC-055 — Test infrastructure choices in T-003
+
+- **Status:** Accepted (owner approved T-003 tests and option A, 2026-10-29)
+- **Decision:**
+  - The documentation-range checker lives in `scripts/doc_ranges.py`, so the repository audit (T-014) reuses it instead of keeping a second copy.
+  - pytest uses `pythonpath = ["."]` and `--import-mode=importlib`.
+  - Negative test examples are assembled at runtime, so test files never contain literal non-documentation addresses.
+  - A test checks that tests run on Python 3.13 inside the project venv (TR-001, TR-003); it also gives the coverage gate real data.
+- **Consequences:** The network block closes the socket before raising, because `socket.create_connection` only cleans up after `OSError`. `verify.py` forces UTF-8 output, because Windows cp1252 output crashed it during mutation testing.
+
+### DEC-056 — Approved lint suppressions (TS-42 register)
+
+- **Status:** Accepted (owner, 2026-10-29)
+- **Decision:** These suppressions are approved, each with its reason on the same line:
+
+| File | Rule | Reason |
+|---|---|---|
+| `tests/security/test_gitignore.py` | `S603` | Fixed argument list to `git check-ignore`, no shell, no untrusted input |
+| `scripts/verify.py` | `S603` | Fixed argument lists built in the script, run with the project interpreter, no shell |
+
+- **Consequences:** Any new suppression needs a new row here, with owner approval.
 
 ---
 

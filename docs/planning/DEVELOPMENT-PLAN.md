@@ -21,7 +21,7 @@
 
 ---
 
-> **Current task:** **T-003** — Verification entry point and baseline safety tests (not started).
+> **Current task:** **T-004** — Traceability script and first commit (not started).
 >
 > *(This line is read by the session-context hook HK-05. It is updated at the start and end of each task.)*
 
@@ -90,7 +90,7 @@
   2. `tests/conftest.py` with the autouse network block.
   3. `scripts/verify.py`: steps 1–4 of Test Strategy §11.1, `--quick` flag, placeholder for step 0 (locks) and step 5 (trace).
 - **Verification:** `verify.py` passes; deliberately breaking each check (owner present) makes it fail.
-- **Status:** Not started
+- **Status:** Done (2026-10-29) — 33 tests pass; `verify.py` full run PASS; mutation checks M1–M4 each turned it red and were reverted. See DEC-055, DEC-056
 
 ### T-004 — Traceability script and first commit
 - **Requirements:** DEC-039, TS-31, TS-32, Test Strategy §11.1 step 5

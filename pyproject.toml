@@ -54,7 +54,8 @@ mypy_path = "src"
 
 [tool.pytest.ini_options]                               # TR-065, TS-31
 testpaths = ["tests"]
-addopts = "--strict-markers --strict-config"
+pythonpath = ["."]                                      # lets tests import shared checkers from scripts/
+addopts = "--strict-markers --strict-config --import-mode=importlib"
 filterwarnings = ["error"]
 markers = [
   "req(*ids): requirement IDs this test verifies (TS-31)",
