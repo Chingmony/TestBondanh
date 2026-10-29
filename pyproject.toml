@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools==84.2.1"]                       # TR-012, DEC-026
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "testbondanh"
+dynamic = ["version"]                                   # single source: testbondanh.__version__
+description = "Local CLI that compares Nmap XML scans and reports confirmed and uncertain network changes."
+readme = "README.md"
+license = "MIT"                                         # DEC-005
+license-files = ["LICENSE"]
+authors = [{ name = "Chingmony" }]
+requires-python = ">=3.13,<3.14"                        # TR-001
+dependencies = ["defusedxml==0.7.1"]                    # TR-010 — the only runtime dependency
+
+[project.optional-dependencies]
+dev = [                                                 # TR-012 / TRD §3.2 — exact pins
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "ruff==0.17.3",
+  "mypy==2.4.0",
+  "pip-audit==2.10.1",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "testbondanh.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]                                         # TR-061 src layout
+
+[tool.ruff]                                             # TR-063
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+extend-exclude = ["docs", "*.md"]                       # never reformat code examples in approved documents
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]                                   # assert allowed in tests only
+
+[tool.ruff.format]
+line-ending = "lf"                                      # TR-041 deterministic output
+
+[tool.mypy]                                             # TR-064
+python_version = "3.13"
+strict = true
+files = ["src"]
+mypy_path = "src"
+
+[tool.pytest.ini_options]                               # TR-065, TS-31
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
+filterwarnings = ["error"]
+markers = [
+  "req(*ids): requirement IDs this test verifies (TS-31)",
+  "slow: slow tests, excluded by verify.py --quick",
+  "performance: NFR-001 timing tests, excluded by verify.py --quick",
+]
+
+[tool.coverage.run]                                     # DEC-038
+branch = true
+source = ["testbondanh"]
+
+[tool.coverage.report]
+fail_under = 85                                         # overall; the 95 % domain/reporting check runs in verify.py
+show_missing = true

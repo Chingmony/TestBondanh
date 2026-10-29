@@ -21,7 +21,7 @@
 
 ---
 
-> **Current task:** **T-001** — Repository foundation (step 4: README stub remains).
+> **Current task:** **T-003** — Verification entry point and baseline safety tests (not started).
 >
 > *(This line is read by the session-context hook HK-05. It is updated at the start and end of each task.)*
 
@@ -70,7 +70,7 @@
   4. Create `README.md` stub: one-paragraph description, authorised-use notice, "under development".
 - **Verification:** `git branch` shows `main`; owner reviews the three files.
 - **Done when:** owner accepts. No commit yet.
-- **Status:** Awaiting approval — steps 1–3 done with the first push (DEC-049, 2026-10-28); step 4 README written 2026-10-29, content approved by owner before writing
+- **Status:** Done (2026-10-29) — committed and pushed as `4c2bd95`
 
 ### T-002 — Python project and environment
 - **Requirements:** TR-001 – TR-003, TR-010 – TR-012, TR-060 – TR-066, DEC-024 – DEC-026
@@ -81,7 +81,7 @@
   4. Package skeleton: `src/testbondanh/__init__.py` with `__version__`; empty layer packages per SAD §9.
   5. ★ Owner runs or approves `pip-audit` (needs network).
 - **Verification:** `.venv\Scripts\python.exe -c "import testbondanh"` succeeds; `pip-audit` clean; ruff and mypy run without errors.
-- **Status:** Not started
+- **Status:** Done (2026-10-29) — all verification passed (Python 3.13.5; pinned versions match TRD; ruff, mypy clean; pip-audit clean after DEC-051). Entry point deferred to T-043 (DEC-052); pushed on owner instruction (DEC-054)
 
 ### T-003 — Verification entry point and baseline safety tests
 - **Requirements:** TR-067, TR-SEC-02, TR-SEC-03, TR-SEC-04, DEC-031, DEC-038

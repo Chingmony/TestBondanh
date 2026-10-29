@@ -5,7 +5,7 @@
 | Document | Decision Log |
 | Purpose | Record significant project decisions, the options considered, and the reasoning, so later documents, code, and AI agents can follow them consistently |
 | Status | **Draft** — living document |
-| Version | 0.17 |
+| Version | 0.19 |
 | Owner | Project owner (Chingmony) |
 | Last updated | 2026-10-27 |
 
@@ -30,6 +30,8 @@
 | 0.15 | 2026-10-28 | Claude Code | Added DEC-046 – DEC-048 from planning answers |
 | 0.16 | 2026-10-28 | Claude Code | Added DEC-049: documentation pushed before the harness, on owner instruction |
 | 0.17 | 2026-10-29 | Claude Code | Added DEC-050; noted Development Plan and Risk Register v1.0 approval |
+| 0.18 | 2026-10-29 | Claude Code | Added DEC-051 – DEC-053 from T-002 |
+| 0.19 | 2026-10-29 | Claude Code | Added DEC-054: T-002 skeleton pushed before the harness; harness doc restored |
 
 ## How to Use This Log
 
@@ -91,6 +93,10 @@
 | DEC-048 | Detail M0–M2 now; refine later milestones at their start | Accepted | 2026-10-28 |
 | DEC-049 | Push documentation, LICENSE, and .gitignore before the harness exists | Accepted | 2026-10-28 |
 | DEC-050 | Harness build order: permissions and hooks before the skill and subagent | Accepted | 2026-10-29 |
+| DEC-051 | Upgrade the venv's pip to 26.2.2 | Accepted | 2026-10-29 |
+| DEC-052 | Console command added in T-043; `cli/__init__.py` re-exports `main` | Accepted | 2026-10-29 |
+| DEC-053 | ruff excludes `docs/` and Markdown; `.gitattributes` forces LF | Accepted | 2026-10-29 |
+| DEC-054 | Push the T-002 project skeleton before the harness exists | Accepted | 2026-10-29 |
 
 ---
 
@@ -409,6 +415,34 @@ eports`, with `--output` to override. Existing files are never overwritten.
 - **Decision:** Build the harness as CLAUDE.md → permissions → hooks (test lock, lint, stop-verify, repo audit, session context) → `/write-tests` skill → `code-reviewer` subagent.
 - **Alternatives:** The mission's order (CLAUDE.md → skill → subagent → hooks) — not chosen. The skill's first real use would then run without test-lock and verification hooks.
 - **Consequences:** The skill and subagent are demonstrated a few sessions later, but under the full set of protections. Reversible on owner request before T-012 starts.
+
+### DEC-051 — Upgrade pip in the virtual environment
+
+- **Status:** Accepted (owner, T-002, 2026-10-29)
+- **Context:** `pip-audit` found 6 distinct advisories (PYSEC-2026-1795, -1796, -2875, -2876, -196, -3721) in pip 25.1.1, the version bundled with Python 3.13.5. Project dependencies had none.
+- **Decision:** Upgrade the virtual environment's pip to 26.2.2 before installing. The pin is recorded in the header of `requirements-dev.lock.txt`, because `pip freeze` omits pip.
+- **Consequences:** Re-audit showed no known vulnerabilities (TR-SEC-01 met on 2026-10-29). Rebuilding `.venv` must repeat the upgrade step.
+
+### DEC-052 — Console command entry point
+
+- **Status:** Accepted (owner approved the T-002 `pyproject.toml` draft, 2026-10-29)
+- **Context:** TRD TR-062 names the entry point `testbondanh.cli:main`; SAD §4.1 places `main()` in `cli/main.py`.
+- **Decision:** Add `[project.scripts]` in T-043, when `main()` exists. `cli/__init__.py` re-exports `main` from `cli/main.py`, which satisfies both documents without changing either.
+- **Consequences:** Until T-043 there is no `testbondanh` command; `import testbondanh` works.
+
+### DEC-053 — Formatter scope and line endings
+
+- **Status:** Accepted (owner, T-002, 2026-10-29)
+- **Context:** ruff 0.17 also formats Python code blocks inside Markdown, so the approved documents were in scope for `ruff format`. Git on this machine converts line endings to CRLF.
+- **Decision:** `[tool.ruff] extend-exclude = ["docs", "*.md"]`, so approved documents are never reformatted. `.gitattributes` sets `* text=auto eol=lf`, so files stay LF for deterministic golden-file comparisons (TR-041).
+
+### DEC-054 — Push the T-002 skeleton before the harness exists
+
+- **Status:** Accepted (owner instruction, 2026-10-29). Further amends DEC-047 (see also DEC-049).
+- **Context:** DEC-047 holds code pushes until the harness is verified. T-002 adds only configuration and an empty package skeleton: `pyproject.toml`, `.gitattributes`, the lock file, and six `__init__.py` files.
+- **Decision:** Push T-002 on owner instruction after the same manual audit as DEC-049, plus `pip-audit` clean (DEC-051).
+- **Also recorded:** at 12:37 on 2026-10-29, `docs/harness/AI-HARNESS-DESIGN.md` was found damaged in the working copy. A few characters had been deleted from the §5.2 JSON example. The cause is unknown; it wasn't an edit by Claude. On owner instruction, the file was restored from commit `4c2bd95` with `git checkout`.
+- **Consequences:** Pushes after this one still require owner instruction. Feature code still waits for the verified harness, unless the owner decides otherwise.
 
 ---
 
