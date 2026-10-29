@@ -5,7 +5,7 @@
 | Document | Decision Log |
 | Purpose | Record significant project decisions, the options considered, and the reasoning, so later documents, code, and AI agents can follow them consistently |
 | Status | **Draft** — living document |
-| Version | 0.20 |
+| Version | 0.21 |
 | Owner | Project owner (Chingmony) |
 | Last updated | 2026-10-27 |
 
@@ -33,6 +33,7 @@
 | 0.18 | 2026-10-29 | Claude Code | Added DEC-051 – DEC-053 from T-002 |
 | 0.19 | 2026-10-29 | Claude Code | Added DEC-054: T-002 skeleton pushed before the harness; harness doc restored |
 | 0.20 | 2026-10-29 | Claude Code | Added DEC-055, DEC-056 from T-003 |
+| 0.21 | 2026-10-29 | Claude Code | Added DEC-057 from T-004 |
 
 ## How to Use This Log
 
@@ -100,6 +101,7 @@
 | DEC-054 | Push the T-002 project skeleton before the harness exists | Accepted | 2026-10-29 |
 | DEC-055 | Shared address checker in `scripts/`; pytest `importlib` mode; TR-001 package test | Accepted | 2026-10-29 |
 | DEC-056 | Approved lint suppressions (TS-42 register) | Accepted | 2026-10-29 |
+| DEC-057 | Traceability tag rules | Accepted | 2026-10-29 |
 
 ---
 
@@ -468,6 +470,16 @@ eports`, with `--output` to override. Existing files are never overwritten.
 | `scripts/verify.py` | `S603` | Fixed argument lists built in the script, run with the project interpreter, no shell |
 
 - **Consequences:** Any new suppression needs a new row here, with owner approval.
+
+### DEC-057 — Traceability tag rules
+
+- **Status:** Accepted (owner approved T-004 tests, 2026-10-29)
+- **Decision:**
+  - Valid test tags are requirement IDs only: `BR`, `PR`, `FR`, `NFR`, `TR`, `TR-SEC`, `TS`. Decisions, risks, and questions can't be tags.
+  - An ID is "known" if it appears anywhere in `docs/**/*.md`.
+  - Only the decorator form `@pytest.mark.req(...)` counts, not module-level `pytestmark`.
+  - Test files are parsed with `ast` and never imported; syntax errors are reported as problems.
+- **Limits:** An ID that is mentioned in the documents but never defined would pass. The check doesn't prove the test actually verifies the requirement; owner test approval (DEC-035) covers that.
 
 ---
 

@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
         "3 mypy --strict": _step("3 mypy --strict", ["-m", "mypy"]),
         "4 pytest + coverage >= 85 %": _step("4 pytest + coverage >= 85 %", pytest_args),
         "4b core coverage >= 95 %": _core_coverage(),
-        "5 traceability": _not_yet("5 traceability", "T-004"),
+        "5 traceability": _step("5 traceability", ["scripts/trace.py", "--check"]),
     }
 
     print("\n== Summary ==")

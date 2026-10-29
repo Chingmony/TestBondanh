@@ -21,7 +21,7 @@
 
 ---
 
-> **Current task:** **T-004** — Traceability script and first commit (not started).
+> **Current task:** **T-010** — `CLAUDE.md` and path-scoped rules (M1 Harness; not started).
 >
 > *(This line is read by the session-context hook HK-05. It is updated at the start and end of each task.)*
 
@@ -50,7 +50,7 @@
 
 | Milestone | Goal | Exit criteria | Sessions (est.) | Status |
 |---|---|---|---|---|
-| **M0 Bootstrap** | A clean, runnable, verifiable project skeleton | `verify.py` and `trace.py` run green on an empty test suite; first local commit on `main` | 2–3 | Not started |
+| **M0 Bootstrap** | A clean, runnable, verifiable project skeleton | `verify.py` and `trace.py` run green on an empty test suite; first local commit on `main` | 2–3 | Done (2026-10-29) |
 | **M1 Harness** | Verified AI harness (H-1 – H-7) | V-01 – V-11 pass with recorded evidence (except V-09/V-10 parts that need M2 code, noted); first public push | 8–12 | Not started |
 | **M2 Safe parsing** | Untrusted XML handled safely; first full 8-step loop (H-8) | FR-020 – FR-025, FR-027, FR-033, TR-022 Passing | 4–6 | Not started |
 | **M3 Domain core** | All classification, ranking, and advice rules, pure | FR-028 – FR-030, FR-052 – FR-072, FR-085 Passing at domain level | 8–10 | Not started |
@@ -100,7 +100,7 @@
   3. Wire into `verify.py` step 5.
   4. ★ Owner instructs the first commit (local only). Commit includes all `docs/`.
 - **Verification:** `verify.py` full run passes; `git log` shows one commit on `main`.
-- **Status:** Not started
+- **Status:** Done (2026-10-29) — 14 trace tests pass; `trace.py --check` 0 problems (11 IDs covered); wired as `verify.py` step 5; mutation checks (untagged test, unknown ID, DEC used as tag) each turned verify red (2026-10-29). See DEC-057
 
 ## 5. M1 — Harness (detailed)
 
