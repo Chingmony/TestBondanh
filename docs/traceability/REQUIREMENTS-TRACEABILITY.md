@@ -178,7 +178,7 @@
 | SM-05 Repository audit clean | TR-SEC-03 – TR-SEC-05 Passing before each push | Not started |
 | SM-06 Masking leaks nothing | FR-090 – FR-094 tests Passing; MC-03 done | Not started |
 | SM-07 Harness verified | Defined in AI Harness Design | Not started |
-| SM-08 Documents approved | BRD, PRD, FRD, TRD, SAD approved 2026-10-27; Test Strategy, RTM, and AI Harness Design approved 2026-10-28; Development Plan pending | In progress |
+| SM-08 Documents approved | All planned documents approved: BRD, PRD, FRD, TRD, SAD (2026-10-27); Test Strategy, RTM, AI Harness Design (2026-10-28); Development Plan, Risk Register (2026-10-29). Decision Log is a living document | Met for documentation; continues per change |
 
 ## 6. Approval Checklist
 

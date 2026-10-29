@@ -5,8 +5,8 @@
 | Document | Risk Register |
 | Project | TestBondanh — Network Security Monitoring Tool |
 | Purpose | Track project risks, their mitigations, and their current status in one place |
-| Status | **Draft** — living document, awaiting owner review |
-| Version | 0.2 |
+| Status | **Approved** — by project owner, 2026-10-29 |
+| Version | 1.0 |
 | Owner | Project owner (Chingmony) |
 | Last updated | 2026-10-28 |
 
@@ -16,6 +16,7 @@
 |---|---|---|---|
 | 0.1 | 2026-10-28 | Claude Code | Initial register: BRD R-01 – R-10 carried over; R-11 – R-20 added from later documents |
 | 0.2 | 2026-10-28 | Claude Code | R-19 closed: commit email already noreply |
+| 1.0 | 2026-10-29 | Project owner | Approved |
 
 ## How to Use
 
@@ -63,8 +64,8 @@
 
 ## Approval Checklist
 
-To be completed by the owner. **No item is checked until the owner explicitly approves it.**
+Completed: owner approved this document on 2026-10-29.
 
-- [ ] Risks R-01 – R-20 are relevant and correctly rated
-- [ ] Mitigations are acceptable
-- [ ] **Risk Register approved — status may change to "Approved" (version 1.0)**
+- [x] Risks R-01 – R-20 are relevant and correctly rated
+- [x] Mitigations are acceptable
+- [x] **Risk Register approved — status may change to "Approved" (version 1.0)**

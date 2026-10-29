@@ -5,7 +5,7 @@
 | Document | Decision Log |
 | Purpose | Record significant project decisions, the options considered, and the reasoning, so later documents, code, and AI agents can follow them consistently |
 | Status | **Draft** — living document |
-| Version | 0.16 |
+| Version | 0.17 |
 | Owner | Project owner (Chingmony) |
 | Last updated | 2026-10-27 |
 
@@ -29,6 +29,7 @@
 | 0.14 | 2026-10-28 | Claude Code | Noted AI Harness Design v1.0 approval; HQ-01 resolved (`inherit`) |
 | 0.15 | 2026-10-28 | Claude Code | Added DEC-046 – DEC-048 from planning answers |
 | 0.16 | 2026-10-28 | Claude Code | Added DEC-049: documentation pushed before the harness, on owner instruction |
+| 0.17 | 2026-10-29 | Claude Code | Added DEC-050; noted Development Plan and Risk Register v1.0 approval |
 
 ## How to Use This Log
 
@@ -89,6 +90,7 @@
 | DEC-047 | Local commits from M0; first public push only after the harness is verified | Amended by DEC-049 | 2026-10-28 |
 | DEC-048 | Detail M0–M2 now; refine later milestones at their start | Accepted | 2026-10-28 |
 | DEC-049 | Push documentation, LICENSE, and .gitignore before the harness exists | Accepted | 2026-10-28 |
+| DEC-050 | Harness build order: permissions and hooks before the skill and subagent | Accepted | 2026-10-29 |
 
 ---
 
@@ -400,6 +402,13 @@ eports`, with `--output` to override. Existing files are never overwritten.
   - The scanner was first shown to catch planted examples of each type.
   - The commit identity uses GitHub's noreply email (R-19 resolved).
 - **Consequences:** Later pushes still require owner instruction. Code pushes still wait for the verified harness (DEC-047 otherwise unchanged). T-001 is partly done: the branch rename, `LICENSE`, and `.gitignore` remain; the README is still to do.
+
+### DEC-050 — Harness build order
+
+- **Status:** Accepted (owner approved the Development Plan as written, 2026-10-29)
+- **Decision:** Build the harness as CLAUDE.md → permissions → hooks (test lock, lint, stop-verify, repo audit, session context) → `/write-tests` skill → `code-reviewer` subagent.
+- **Alternatives:** The mission's order (CLAUDE.md → skill → subagent → hooks) — not chosen. The skill's first real use would then run without test-lock and verification hooks.
+- **Consequences:** The skill and subagent are demonstrated a few sessions later, but under the full set of protections. Reversible on owner request before T-012 starts.
 
 ---
 

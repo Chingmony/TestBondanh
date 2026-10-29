@@ -5,8 +5,8 @@
 | Document | Development Plan |
 | Project | TestBondanh — Network Security Monitoring Tool |
 | Purpose | Order the approved work into milestones and one-hour tasks, each traceable to requirements and governed by the approval workflow |
-| Status | **Draft** — awaiting owner review |
-| Version | 0.1 |
+| Status | **Approved** — by project owner, 2026-10-29 |
+| Version | 1.0 |
 | Based on | All approved documents (BRD … AI Harness Design, v1.0) |
 | Owner / Approver | Project owner (Chingmony) |
 | Author | Claude Code (drafted under owner direction) |
@@ -17,10 +17,11 @@
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-10-28 | Claude Code | Initial plan; M0–M2 detailed, M3–M7 outlined (DEC-048) |
+| 1.0 | 2026-10-29 | Project owner | Approved; harness order as planned (hooks before skill and subagent, DEC-050) |
 
 ---
 
-> **Current task:** none — awaiting plan approval. First task on approval: **T-001**.
+> **Current task:** **T-001** — Repository foundation (step 4: README stub remains).
 >
 > *(This line is read by the session-context hook HK-05. It is updated at the start and end of each task.)*
 
@@ -69,7 +70,7 @@
   4. Create `README.md` stub: one-paragraph description, authorised-use notice, "under development".
 - **Verification:** `git branch` shows `main`; owner reviews the three files.
 - **Done when:** owner accepts. No commit yet.
-- **Status:** In progress — steps 1–3 done early with the first push (DEC-049, 2026-10-28); step 4 (README) remains
+- **Status:** Awaiting approval — steps 1–3 done with the first push (DEC-049, 2026-10-28); step 4 README written 2026-10-29, content approved by owner before writing
 
 ### T-002 — Python project and environment
 - **Requirements:** TR-001 – TR-003, TR-010 – TR-012, TR-060 – TR-066, DEC-024 – DEC-026
@@ -117,7 +118,7 @@ Each task implements one harness step (AI Harness Design §16) and records evide
 | **T-017** | H-4 | `code-reviewer` subagent; seeded-defect test on a scratch branch (★ owner approves creating and later deleting the scratch branch) | V-10 | Not started |
 | **T-018** | — | First public push: ★ owner checks the commit author email (R-19), runs `pip-audit`, confirms `repo_audit.py` passes; ★ owner instructs push | Remote shows `main`; audit evidence recorded | Not started |
 
-**Order note:** hooks (T-012 – T-015) come before the skill and subagent (T-016 – T-017) in this plan, so that the skill's first real use already runs under test-lock and verification hooks. This differs from Harness Design §16's H-3/H-4-before-H-5 listing; the dependencies there allow either order. *(Flagged for owner review.)*
+**Order note:** hooks (T-012 – T-015) come before the skill and subagent (T-016 – T-017) in this plan, so that the skill's first real use already runs under test-lock and verification hooks. This differs from Harness Design §16's H-3/H-4-before-H-5 listing; the dependencies there allow either order. Accepted with plan approval (DEC-050).
 
 ## 6. M2 — Safe Parsing (detailed)
 
@@ -157,12 +158,12 @@ A task may span sessions; it must always stop at a checkpoint or in a state wher
 
 ## 10. Approval Checklist
 
-To be completed by the owner. **No item is checked until the owner explicitly approves it.**
+Completed: owner approved this document on 2026-10-29.
 
-- [ ] Milestones, exit criteria, and estimates (§3)
-- [ ] M0 tasks T-001 – T-004 (§4)
-- [ ] M1 tasks T-010 – T-018, including the order note (§5)
-- [ ] M2 tasks T-020 – T-024 (§6)
-- [ ] M3 – M7 outline (§7)
-- [ ] Session routine and change control (§8 – §9)
-- [ ] **Development Plan approved — status may change to "Approved" (version 1.0)**
+- [x] Milestones, exit criteria, and estimates (§3)
+- [x] M0 tasks T-001 – T-004 (§4)
+- [x] M1 tasks T-010 – T-018, including the order note (§5)
+- [x] M2 tasks T-020 – T-024 (§6)
+- [x] M3 – M7 outline (§7)
+- [x] Session routine and change control (§8 – §9)
+- [x] **Development Plan approved — status may change to "Approved" (version 1.0)**
